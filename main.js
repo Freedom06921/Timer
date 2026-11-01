@@ -5,6 +5,22 @@ const path = require('path');
 // 保持窗口的全局引用，防止JS垃圾回收导致窗口意外关闭
 let mainWindow;
 
+// Vite 开发服务器地址（npm run dev 时可用）
+const DEV_SERVER_URL = 'http://localhost:5173';
+
+// 开发模式连接 Vite 服务器，失败则回退到构建产物
+async function loadApp() {
+  if (!app.isPackaged) {
+    try {
+      await mainWindow.loadURL(DEV_SERVER_URL);
+      return;
+    } catch (error) {
+      // 开发服务器未启动，继续使用 dist/index.html
+    }
+  }
+  await mainWindow.loadFile(path.join(__dirname, 'renderer-dist', 'index.html'));
+}
+
 // 创建主窗口
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -22,8 +38,8 @@ function createWindow() {
     }
   });
 
-  // 加载HTML文件
-  mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  // 加载页面：开发走 Vite，生产走构建产物
+  loadApp();
 
   // 进入全屏模式
   mainWindow.setFullScreen(true);

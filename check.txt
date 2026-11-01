@@ -1,0 +1,4 @@
+﻿vue: True
+three: True
+vite: True
+@vitejs/plugin-vue: True

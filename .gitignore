@@ -1,5 +1,6 @@
 node_modules/
 dist/
+renderer-dist/
 .builder-cache/
 
 # 打包过程产生的临时文件
