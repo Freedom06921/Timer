@@ -5,6 +5,18 @@ const path = require('path');
 // 保持窗口的全局引用，防止JS垃圾回收导致窗口意外关闭
 let mainWindow;
 
+// 绿色便携模式：打包后把所有用户数据（缓存、配置）写到程序自己的目录，
+// 不往 %APPDATA% 里留任何痕迹，整个文件夹删掉就等于卸载
+if (app.isPackaged) {
+  try {
+    const portableData = path.join(path.dirname(process.execPath), 'data');
+    app.setPath('userData', portableData);
+    app.setPath('cache', path.join(portableData, 'cache'));
+  } catch (error) {
+    // 目录不可写时回退到默认位置，不影响启动
+  }
+}
+
 // Vite 开发服务器地址（npm run dev 时可用）
 const DEV_SERVER_URL = 'http://localhost:5173';
 

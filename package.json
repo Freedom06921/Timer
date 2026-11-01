@@ -7,7 +7,8 @@
     "dev": "vite",
     "start": "electron .",
     "build": "vite build",
-    "pack": "vite build && electron-builder --win --x64"
+    "pack": "vite build && electron-builder --win --x64",
+    "pack:dir": "vite build && electron-builder --win --x64 --dir"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.10",
@@ -37,23 +38,19 @@
     "win": {
       "target": [
         {
-          "target": "nsis",
+          "target": "dir",
           "arch": [
             "x64"
           ]
         },
         {
-          "target": "portable",
+          "target": "zip",
           "arch": [
             "x64"
           ]
         }
       ],
       "icon": "resources/icon.ico"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
     }
   },
   "dependencies": {
