@@ -1,0 +1,51 @@
+{
+  "name": "fullscreen-timer",
+  "version": "1.0.0",
+  "description": "全屏计时器 - 支持自定义UI颜色",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^30.5.1",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.timer.fullscreen",
+    "productName": "全屏计时器",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "styles.css",
+      "resources/**",
+      "package.json",
+      "!dist/**",
+      "!node_modules/**",
+      "!**/*.log",
+      "!make-icon.js",
+      "!.builder-cache/**",
+      "!**/.DS_Store"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

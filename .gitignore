@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.builder-cache/
+
+# 打包过程产生的临时文件
+*.log
+*.err
+make-icon.js
+
+# 编辑器插件目录
+.trae-html-share-packages/
+
+# 系统文件
+.DS_Store
+Thumbs.db
