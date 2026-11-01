@@ -5,6 +5,10 @@ const path = require('path');
 // 保持窗口的全局引用，防止JS垃圾回收导致窗口意外关闭
 let mainWindow;
 
+// 某些 Windows 环境（安全软件/组策略）下 Chromium 沙箱初始化会失败，
+// 表现为启动瞬间闪退（退出码 0x80000003），这里关闭沙箱以保证能正常启动
+app.commandLine.appendSwitch('no-sandbox');
+
 // 绿色便携模式：打包后把所有用户数据（缓存、配置）写到程序自己的目录，
 // 不往 %APPDATA% 里留任何痕迹，整个文件夹删掉就等于卸载
 if (app.isPackaged) {
