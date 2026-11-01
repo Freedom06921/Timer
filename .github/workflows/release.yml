@@ -32,6 +32,10 @@ jobs:
 
       - name: 打包 Windows 安装包与便携版
         run: npx electron-builder --win --x64
+        env:
+          # 用国内镜像下载打包工具，避免 GitHub 下载被限流
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
 
       # 签名步骤（等你申请到 SignPath 免费证书后再启用）：
       # - name: 使用 SignPath 签名
